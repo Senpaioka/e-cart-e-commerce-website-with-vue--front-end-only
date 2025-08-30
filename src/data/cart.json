@@ -1,0 +1,30 @@
+[
+  {
+    "id": 8,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "120",
+    "image": "/products/8.jpg",
+    "category": "Gadgets",
+    "color": "White",
+    "size": null
+  },
+  {
+    "id": 10,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "160",
+    "image": "/products/10.jpg",
+    "color": "Black",
+    "category": "Gadgets"
+  },
+  {
+    "id": 11,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "160",
+    "image": "/products/11.jpg",
+    "color": "Black",
+    "category": "Gadgets"
+  }
+]

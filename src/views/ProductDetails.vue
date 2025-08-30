@@ -1,0 +1,137 @@
+<script setup>
+
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import data from '../data/home.json';
+
+// get id from url
+const route_id = useRoute()
+const productId = route_id.params.id
+
+
+// get product by id
+const getProduct = computed(() => data.find(item => item.id === parseInt(productId)))
+
+</script>
+
+
+<template>
+
+<section class="section-content padding-y bg">
+    <div class="container">
+        <div class="card">
+            <div class="row no-gutters">
+
+                <aside class="col-md-6">
+                    <article class="gallery-wrap"> 
+                        <div class="img-big-wrap">
+                            <a href="#"><img v-bind:src="getProduct.image"></a>
+                        </div> 
+                    </article> 
+                </aside>
+
+        <main class="col-md-6 border-left">
+
+        <article class="content-body">
+            <h2 class="title">{{ getProduct.product }}</h2>
+
+            <div class="mb-3"> 
+                <var class="price h4">${{ getProduct.price }}</var> 
+            </div> 
+
+            <p>{{ getProduct.description }}</p>
+
+            <hr>
+                <div v-if="getProduct.color">
+                <div class="row">
+                    <div class="item-option-select">
+                        <h6>Choose Color</h6>
+                        
+                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                        <div v-for="(value, key) in getProduct.color" v-bind:key="key">
+                            <label class="btn btn-light custom-radio">
+                                <input type="radio" name="radio_color" :value="key"> {{ value }}
+                            </label>
+                        </div>                            
+                        
+                        <!-- <label class="btn btn-light active">
+                            <input type="radio" name="radio_color checked"> Gold
+                        </label> -->
+                        
+                        </div> 
+                    </div>
+                </div>
+                </div>
+
+                <div v-if="getProduct.size">
+                <div class="row">
+                    <div class="item-option-select">
+                        <h6>Select Size</h6>
+                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+
+                            <div v-for="(value, key) in getProduct.size" v-bind:key="key">
+                                <label class="btn btn-light custom-radio">
+                                    <input type="radio" name="radio_color" :value="key"> {{ value }}
+                                </label>
+                            </div>
+                        <!-- <label class="btn btn-light active">
+                            <input type="radio" name="radio_color" checked> M
+                        </label> -->
+                        </div> 
+                    </div>
+                </div> 
+                </div>
+
+                <hr>
+
+                <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+        </article> 
+        </main> 
+    </div> 
+    </div>
+
+    <br>
+
+        <div class="row">
+            <div class="col-md-9">
+
+                <header class="section-heading">
+                    <h3>Customer Reviews </h3>  
+                </header>
+
+            <article class="box mb-3">
+                <div class="icontext w-100">
+                    <img src="../assets/images/avatars/avatar1.jpg" class="img-xs icon rounded-circle">
+                    <div class="text">
+                        <span class="date text-muted float-md-right">24.04.2020 </span>  
+                        <h6 class="mb-1">Mike John </h6>
+                        
+                    </div>
+                </div> 
+
+                <div class="mt-3">
+                    <p>
+                        Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    </p>	
+                </div>
+            </article>
+            </div> 
+        </div> 
+    </div> 
+</section>
+
+</template>
+
+
+
+<style scoped>
+
+.custom-radio input[type="radio"] {
+  display: none; 
+}
+
+</style>
+
+

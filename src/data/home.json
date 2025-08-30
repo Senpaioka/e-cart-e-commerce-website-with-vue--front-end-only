@@ -1,0 +1,165 @@
+[
+  {
+    "id": 1,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "120",
+    "image": "/products/1.jpg",
+    "category": "Clothing",
+    "color": {
+      "blue": "Blue",
+      "white": "White",
+      "black": "Black",
+      "green": "Green"
+    },
+    "size": {
+      "s": "S",
+      "m": "M",
+      "l": "L",
+      "xl": "XL"
+    }
+  },
+  {
+    "id": 2,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "150",
+    "image": "/products/2.jpg",
+    "category": "Clothing",
+    "color": {
+      "blue": "Blue",
+      "white": "White",
+      "black": "Black",
+      "green": "Chocolate"
+    },
+    "size": {
+      "s": "S",
+      "m": "M",
+      "l": "L",
+      "xl": "XL",
+      "xxl": "XXL"
+    }
+  },
+  {
+    "id": 3,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "180",
+    "image": "/products/3.jpg",
+    "category": "Clothing",
+    "size": {
+      "s": "S",
+      "m": "M",
+      "l": "L",
+      "xl": "XL",
+      "xxl": "XXL"
+    }
+  },
+  {
+    "id": 4,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "220",
+    "image": "/products/4.jpg",
+    "category": "Bags",
+    "color": {
+      "blue": "Blue",
+      "black": "Black"
+    }
+  },
+  {
+    "id": 5,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "90",
+    "image": "/products/5.jpg",
+    "category": "Wallets",
+    "color": {
+      "brown": "Brown",
+      "black": "Black"
+    }
+  },
+  {
+    "id": 6,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "70",
+    "image": "/products/6.jpg",
+    "category": "Furniture",
+    "color": {
+      "blue": "Blue",
+      "black": "Black"
+    }
+  },
+  {
+    "id": 7,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "160",
+    "image": "/products/7.jpg",
+    "category": "Gadgets",
+    "color": {
+      "blue": "Blue",
+      "white": "White",
+      "black": "Black",
+      "pink": "pink"
+    }
+  },
+  {
+    "id": 8,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "120",
+    "image": "/products/8.jpg",
+    "category": "Gadgets",
+    "color": {
+      "white": "White",
+      "black": "Black"
+    }
+  },
+  {
+    "id": 9,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "160",
+    "image": "/products/9.jpg",
+    "category": "Gadgets",
+    "color": {
+      "blue": "Blue",
+      "white": "White",
+      "black": "Black",
+      "red": "Red"
+    }
+  },
+  {
+    "id": 10,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "160",
+    "image": "/products/10.jpg",
+    "category": "Gadgets"
+  },
+  {
+    "id": 11,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "160",
+    "image": "/products/11.jpg",
+    "category": "Gadgets"
+  },
+  {
+    "id": 12,
+    "product": "Product Name",
+    "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
+    "price": "160",
+    "image": "/products/12.jpg",
+    "category": "Shoes",
+    "size": {
+      "s": "S",
+      "m": "M",
+      "l": "L",
+      "xl": "XL",
+      "xxl": "XXL"
+    }
+  }
+]
