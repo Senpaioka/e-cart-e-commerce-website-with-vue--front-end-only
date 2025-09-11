@@ -1,24 +1,20 @@
 <script setup>
 import { useRoute } from 'vue-router';
-import data from '../data/home.json';
-import { computed, ref, reactive, watchEffect } from 'vue';
+import { computed, ref} from 'vue';
+import {useProductStore} from '../store/ProductStore'
 
-// reactive data
-const allData = reactive(data);
+const store = useProductStore()
 
 // getting category from url
 const selectedCategory = useRoute()
 let getCategory = ref()
-
 getCategory = selectedCategory.params.selected_category;
 
 // filter product based on category
 const filteredProducts = computed(() => {
-    const getProducts = allData.filter(item => item.category === getCategory);
+    const getProducts = store.data.filter(item => item.category === getCategory);
     return getProducts;
 })
-
-
 </script>
 
 

@@ -1,17 +1,18 @@
 <script setup>
 
 import { RouterLink } from 'vue-router';
-import { reactive, ref, watchEffect, computed } from 'vue';
-
-import dataSet from '../data/home.json';
+import { reactive, ref, watchEffect } from 'vue';
 import Pagination from '../components/Pagination.vue';
+import SizeFilter from '../views/Sizes.vue';
+import { useProductStore } from '../store/ProductStore';
 
-const data = reactive(dataSet)
+const store = useProductStore()
+
 
 // total product count
 let totalProduct = ref(0)
 watchEffect(() => {
-    totalProduct.value = data.length;
+    totalProduct.value = store.data.length;
 })
 
 
@@ -19,39 +20,33 @@ watchEffect(() => {
 // filter category
 let categories = new Set();
 
-for(let i=0; i < data.length; i++) {
-	categories.add(data[i].category)
-}
+store.data.forEach(value => {
+	categories.add(value.category)
+})
 
 
 
-// Filtering logic
+// Filtering available size
 const sizeVariation = new Set()
 const selectedSize = ref([])
 
-for(let i=0; i<data.length; i++){
-	if(data[i]?.size){
-		for(let x in data[i].size){
+
+for (let item of store.data){
+	if (item?.size) {
+		for (let x in item.size){
 			sizeVariation.add(x)
 		}
 	}
 }
 
-const filteredProducts = computed(() => {
-	return (data ?? []).filter(product => product.size)
-})
+// const filtered product
 
-const selectedProduct = computed(() =>
-	filteredProducts.value.filter(product =>
-    selectedSize.value.some(size => Object.values(product.size).includes(size))
-  )
-)
+
 
 </script>
 
 
 <template>
-
 <!-- ========================= SECTION PAGE TOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
@@ -71,6 +66,8 @@ const selectedProduct = computed(() =>
 		
 <div class="card">
 
+	<!-- showing category list -->
+
 	<article class="filter-group">
 		<header class="card-header">
 			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
@@ -88,6 +85,7 @@ const selectedProduct = computed(() =>
 			</div> 
 		</div>
 	</article> 
+	<!-- size list -->
 
 	<article class="filter-group">
 		<header class="card-header">
@@ -100,10 +98,10 @@ const selectedProduct = computed(() =>
 			<div class="card-body">
 
 				<label class="checkbox-btn" v-for="value in sizeVariation" :key="value">
-					<input type="checkbox" v-model="selectedSize" :value=value.toUpperCase()>
+					<input type="checkbox" v-model="selectedSize" :value="value.toUpperCase()">
 					<span class="btn btn-light">{{ value.toUpperCase() }}</span>
 				</label>
-	
+
 		</div>
 		</div>
 	</article> 
@@ -112,6 +110,7 @@ const selectedProduct = computed(() =>
 </div> 
 </aside> 
 
+<!-- product counts -->
 
 <main class="col-md-9">
 	<header class="border-bottom mb-4 pb-3">
@@ -120,32 +119,15 @@ const selectedProduct = computed(() =>
 		</div>
 	</header>
 
-	<!-- showing filtered products -->
-	 <div v-if="(selectedSize.length)">
-		<div class="row">
-			<div class="col-md-4" v-for="item in selectedProduct" v-bind:key="item.id" v-memo="[item.id ,item.product, item.price]">
-				<figure class="card card-product-grid">
-					<div class="img-wrap"> 
-						<img v-bind:src="item.image">
-					</div> 
 
-					<figcaption class="info-wrap">
-						<div class="fix-height">
-							<RouterLink v-bind:to="{ name:'product', params: {id:item.id} }" class="title">{{ item.product }}</RouterLink>
-							<div class="price-wrap mt-2">
-								<span class="price">${{ item.price }}</span>
-							</div> 
-						</div>
-						<a href="#" class="btn btn-block btn-primary">Add to cart </a>	
-					</figcaption>
-				</figure>
-			</div> 
-    	</div>
+	<!-- showing all products -->
+	<div>
+		<Pagination :productPerPage="6" :data="store.data" />
 	</div>
 
-	<div v-else>
-		<Pagination :productPerPage="6" :data="data" />
-	</div>
+	<!-- showing filtered products  -->
+	<SizeFilter :productSize="selectedSize"/>
+
 
 </main> 
 

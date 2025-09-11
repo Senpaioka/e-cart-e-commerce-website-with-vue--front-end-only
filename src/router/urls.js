@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from '../views/Home.vue';
-import Register from '../views/Register.vue';
-import Login from '../views/Login.vue';
+import Register from '../auth/Register.vue';
+import Login from '../auth/Login.vue';
 import Product from '../views/ProductDetails.vue';
 import Store from '../views/Store.vue';
 import Filtered from '../views/FilterProduct.vue';

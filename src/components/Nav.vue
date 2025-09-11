@@ -1,9 +1,12 @@
 
 <script setup>
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import dataSet from '../data/home.json'
 import { reactive, onMounted, watch, watchEffect } from 'vue';
+import { useUserInfoStore } from '../store/AuthStore'
 
+const store = useUserInfoStore()
+const router = useRouter()
 // category
 let categories = new Set();
 const data = reactive(dataSet)
@@ -12,6 +15,11 @@ for(let i=0; i < data.length; i++) {
 	categories.add(data[i].category)
 }
 
+// logout
+const handleLogOut = () => {
+  store.logout()
+  router.push({name: 'home'})
+}
 
 </script>
 
@@ -86,13 +94,19 @@ for(let i=0; i < data.length; i++) {
         <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
               <div class="d-flex justify-content-end mb-3 mb-lg-0">
                 <div class="widget-header">
-                  <small class="title text-muted">Welcome guest!</small>
-                  <div> 
+                  <small v-if="store.currentUser" class="title text-muted">Welcome {{ store.currentUser.first_name.charAt(0).toUpperCase() + store.currentUser.first_name.slice(1) }}!</small>
+                  <small v-else class="title text-muted">Welcome guest!</small>
+    
+                    <div v-if="store.currentUser">
+                        <button @click="handleLogOut" class="btn btn-danger">Logout</button>
+                    </div>
+                    <div v-else>
                     <!-- <a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span> -->
                     <RouterLink v-bind:to="{name: 'login'}">Sign in</RouterLink> <span class="dark-transp"> | </span>
                     <!-- <a href="./register.html"> Register</a> -->
                     <RouterLink v-bind:to="{name: 'register'}">Register</RouterLink>
-                  </div>
+                    </div>
+            
                 </div>
                 <a href="./cart.html" class="widget-header pl-3 ml-3">
                   <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>

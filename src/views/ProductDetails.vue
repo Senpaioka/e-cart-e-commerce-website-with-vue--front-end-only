@@ -1,16 +1,16 @@
 <script setup>
 
-import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import data from '../data/home.json';
+import {useProductStore} from '../store/ProductStore'
+
+const store = useProductStore()
 
 // get id from url
 const route_id = useRoute()
-const productId = route_id.params.id
-
+const productId = parseInt(route_id.params.id, 10)
 
 // get product by id
-const getProduct = computed(() => data.find(item => item.id === parseInt(productId)))
+const getProduct = store.data.find(item => item.id === productId)
 
 </script>
 
@@ -91,7 +91,7 @@ const getProduct = computed(() => data.find(item => item.id === parseInt(product
     </div>
 
     <br>
-
+        <!-- review section -->
         <div class="row">
             <div class="col-md-9">
 
@@ -105,7 +105,6 @@ const getProduct = computed(() => data.find(item => item.id === parseInt(product
                     <div class="text">
                         <span class="date text-muted float-md-right">24.04.2020 </span>  
                         <h6 class="mb-1">Mike John </h6>
-                        
                     </div>
                 </div> 
 
@@ -119,6 +118,7 @@ const getProduct = computed(() => data.find(item => item.id === parseInt(product
             </article>
             </div> 
         </div> 
+
     </div> 
 </section>
 
