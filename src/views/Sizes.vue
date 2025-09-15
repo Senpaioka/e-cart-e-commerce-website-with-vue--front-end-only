@@ -4,7 +4,7 @@ import { useProductStore } from '../store/ProductStore';
 
 const store = useProductStore()
 const { data } = store
-console.log(data)
+// console.log(data)
 
 const props = defineProps({
     productSize: {

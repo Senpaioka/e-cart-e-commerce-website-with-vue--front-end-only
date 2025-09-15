@@ -47,6 +47,7 @@
     "price": "180",
     "image": "/products/3.jpg",
     "category": "Clothing",
+    "color": {},
     "size": {
       "s": "S",
       "m": "M",
@@ -65,7 +66,8 @@
     "color": {
       "blue": "Blue",
       "black": "Black"
-    }
+    },
+    "size": {}
   },
   {
     "id": 5,
@@ -77,7 +79,8 @@
     "color": {
       "brown": "Brown",
       "black": "Black"
-    }
+    },
+    "size": {}
   },
   {
     "id": 6,
@@ -89,7 +92,8 @@
     "color": {
       "blue": "Blue",
       "black": "Black"
-    }
+    },
+    "size": {}
   },
   {
     "id": 7,
@@ -103,7 +107,8 @@
       "white": "White",
       "black": "Black",
       "pink": "pink"
-    }
+    },
+    "size": {}
   },
   {
     "id": 8,
@@ -115,7 +120,8 @@
     "color": {
       "white": "White",
       "black": "Black"
-    }
+    },
+    "size": {}
   },
   {
     "id": 9,
@@ -129,7 +135,8 @@
       "white": "White",
       "black": "Black",
       "red": "Red"
-    }
+    },
+    "size": {}
   },
   {
     "id": 10,
@@ -137,7 +144,9 @@
     "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
     "price": "160",
     "image": "/products/10.jpg",
-    "category": "Gadgets"
+    "category": "Gadgets",
+    "color": {},
+    "size": {}
   },
   {
     "id": 11,
@@ -145,7 +154,9 @@
     "description": "This is product description. this part is all about product highlights and detail information regrading to the product",
     "price": "160",
     "image": "/products/11.jpg",
-    "category": "Gadgets"
+    "category": "Gadgets",
+    "color": {},
+    "size": {}
   },
   {
     "id": 12,
@@ -154,6 +165,7 @@
     "price": "160",
     "image": "/products/12.jpg",
     "category": "Shoes",
+    "color": {},
     "size": {
       "s": "S",
       "m": "M",

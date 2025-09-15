@@ -2,8 +2,12 @@
 
 import { useRoute } from 'vue-router';
 import {useProductStore} from '../store/ProductStore'
+import { useCartStore } from '../store/CartStore';
+import { computed, reactive, ref, watch } from 'vue';
+
 
 const store = useProductStore()
+const cart = useCartStore()
 
 // get id from url
 const route_id = useRoute()
@@ -12,6 +16,30 @@ const productId = parseInt(route_id.params.id, 10)
 // get product by id
 const getProduct = store.data.find(item => item.id === productId)
 
+// cart product info
+const productInfo = ref({
+    id: getProduct.id,
+    product: getProduct.product,
+    description: getProduct.description,
+    price: getProduct.price,
+    image: getProduct.image,
+    category: getProduct.category,
+    color: Object.values(getProduct.color)[0] || null,
+    size: Object.values(getProduct.size)[0] || null
+})
+
+
+const cartFunctionality = () => {
+    cart.addToCart(productInfo)
+}
+
+// button change blue -> green
+const checkProduct = computed(() => {
+    return cart.cart.some(item => item.id === getProduct.id)
+})
+
+
+const showOption = getProduct.color
 </script>
 
 
@@ -42,49 +70,49 @@ const getProduct = store.data.find(item => item.id === productId)
             <p>{{ getProduct.description }}</p>
 
             <hr>
-                <div v-if="getProduct.color">
-                <div class="row">
+
+            <div class="row">
                     <div class="item-option-select">
                         <h6>Choose Color</h6>
-                        
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                        <div v-for="(value, key) in getProduct.color" v-bind:key="key">
-                            <label class="btn btn-light custom-radio">
-                                <input type="radio" name="radio_color" :value="key"> {{ value }}
-                            </label>
-                        </div>                            
-                        
-                        <!-- <label class="btn btn-light active">
-                            <input type="radio" name="radio_color checked"> Gold
-                        </label> -->
-                        
+                        <div v-if="Object.keys(getProduct.color).length">
+                            <div class="btn-group btn-group-sm btn-group-toggle">
+                            <div v-for="(value, key) in getProduct.color" :key="key">
+                                <label class="btn btn-light custom-radio" :class="{ active: productInfo.color === value }">
+                                <input v-model="productInfo.color" type="radio" name="radio_color" :value="value">
+                                {{ value }}
+                                </label>
+                            </div>
                         </div> 
+                        </div>
+                        <div v-else>
+                            <small>**Not Applicable</small>
+                        </div>
                     </div>
                 </div>
-                </div>
-
-                <div v-if="getProduct.size">
+                
+            
                 <div class="row">
                     <div class="item-option-select">
                         <h6>Select Size</h6>
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-
-                            <div v-for="(value, key) in getProduct.size" v-bind:key="key">
-                                <label class="btn btn-light custom-radio">
-                                    <input type="radio" name="radio_color" :value="key"> {{ value }}
-                                </label>
+                        <div v-if="Object.values(getProduct.size).length">
+                            <div class="btn-group btn-group-sm btn-group-toggle">
+                                <div v-for="(value, key) in getProduct.size" v-bind:key="key">
+                                    <label class="btn btn-light custom-radio" :class="{ active: productInfo.size === value }">
+                                        <input v-model="productInfo.size" type="radio" name="radio_color" :value="value"> 
+                                        {{ value }}
+                                    </label>
+                                </div>
                             </div>
-                        <!-- <label class="btn btn-light active">
-                            <input type="radio" name="radio_color" checked> M
-                        </label> -->
-                        </div> 
+                        </div>
+                        <div v-else>
+                            <small>**Not Applicable</small>
+                        </div>
                     </div>
-                </div> 
                 </div>
 
                 <hr>
-
-                <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+                <button v-if="checkProduct"  @click="cartFunctionality" class="btn  btn-success"> <span class="text">Product Added</span> <i class="fas fa-shopping-cart"></i></button>
+                <button v-else  @click="cartFunctionality" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
         </article> 
         </main> 
     </div> 

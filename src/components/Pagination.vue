@@ -1,6 +1,10 @@
 <script setup>
-import { ref, reactive, computed, defineProps } from 'vue'
 
+import { ref, reactive, computed, defineProps } from 'vue'
+import { useUserInfoStore } from '../store/AuthStore';
+
+
+const user = useUserInfoStore()
 
 const props = defineProps({
     productPerPage : {
@@ -61,19 +65,17 @@ function goToPage(page) {
 }
 
 
-
-
 // expose to parent
 // defineExpose({
 //     currentPage,
 //     paginatedProducts,
 // })
 
+
 </script>
 
 
 <template>
-
     <!-- show products basic on props -->
     <div class="row">
         <div class="col-md-4" v-for="item in paginatedProducts" v-bind:key="item.id" v-memo="[item.id ,item.product, item.price]">
@@ -84,12 +86,13 @@ function goToPage(page) {
 
                 <figcaption class="info-wrap">
                     <div class="fix-height">
-                        <RouterLink v-bind:to="{ name:'product', params: {id:item.id} }" class="title">{{ item.product }}</RouterLink>
+                        <p class="title">{{ item.product }}</p>
                         <div class="price-wrap mt-2">
                             <span class="price">${{ item.price }}</span>
                         </div> 
                     </div>
-                    <a href="#" class="btn btn-block btn-primary">Add to cart </a>	
+                     <RouterLink v-bind:to="{ name:'product', params: {id:item.id} }" class="btn btn-block btn-primary">See Details</RouterLink>
+                    <!-- <button class="btn btn-block btn-primary">Add to cart </button>	 -->
                 </figcaption>
             </figure>
         </div> 

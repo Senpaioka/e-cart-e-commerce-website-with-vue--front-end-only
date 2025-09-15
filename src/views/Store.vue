@@ -8,7 +8,6 @@ import { useProductStore } from '../store/ProductStore';
 
 const store = useProductStore()
 
-
 // total product count
 let totalProduct = ref(0)
 watchEffect(() => {

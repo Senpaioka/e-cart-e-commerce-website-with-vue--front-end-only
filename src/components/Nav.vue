@@ -4,9 +4,11 @@ import { RouterLink, useRouter } from 'vue-router';
 import dataSet from '../data/home.json'
 import { reactive, onMounted, watch, watchEffect } from 'vue';
 import { useUserInfoStore } from '../store/AuthStore'
+import { useCartStore } from '../store/CartStore'
 
 const store = useUserInfoStore()
 const router = useRouter()
+const cart = useCartStore()
 // category
 let categories = new Set();
 const data = reactive(dataSet)
@@ -108,10 +110,17 @@ const handleLogOut = () => {
                     </div>
             
                 </div>
-                <a href="./cart.html" class="widget-header pl-3 ml-3">
+                <!-- <a href="./cart.html" class="widget-header pl-3 ml-3">
                   <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
                   <span class="badge badge-pill badge-danger notify">0</span>
-                </a>
+                </a> -->
+                <div v-if="store.currentUser">
+                    <RouterLink v-bind:to="{name: 'cart'}" class="widget-header pl-3 ml-3">
+                      <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+                      <span class="badge badge-pill badge-danger notify">{{ cart.count }}</span>
+                    </RouterLink>
+                </div>
+                
               </div> 
           </div> 
       </div> 

@@ -1,9 +1,20 @@
 <script setup>
 
-import { reactive } from 'vue';
-import cartData from '../data/cart.json';
+import { useCartStore } from '../store/CartStore';
+// import { storeToRefs } from "pinia"
 
-const productData = reactive(cartData)
+const cartStore = useCartStore()
+
+
+const decreaseBy1 = (item) => {
+	if (item.quantity > 1) {
+		item.quantity--
+	}
+}
+
+const increaseBy1 = (item) => {
+	item.quantity++
+}
 
 </script>
 
@@ -19,6 +30,10 @@ const productData = reactive(cartData)
 <div class="card">
 <table class="table table-borderless table-shopping-cart">
 
+	<div v-if="cartStore.cart.length < 1" class="title text-dark text-center">
+		<p style="font-size: 30px;">Your Cart is Empty !!</p>
+	</div>
+
     <thead class="text-muted">
         <tr class="small text-uppercase">
         <th scope="col">Product</th>
@@ -28,48 +43,48 @@ const productData = reactive(cartData)
         </tr>
     </thead>
 
-<tbody>
-<tr v-for="value in productData" :key="value.id">
-	<td>
-		<figure class="itemside align-items-center">
-			<div class="aside"><img v-bind:src="value.image" class="img-sm"></div>
-			<figcaption class="info">
-				<a href="#" class="title text-dark">{{ value.product }}</a>
-				<p class="text-muted small">Color: {{ value?.color }} <br> Size: {{ value?.size }}</p>
-			</figcaption>
-		</figure>
-	</td>
+	<tbody>
+	<tr v-for="data in cartStore.cart" :key="data.id">
+		<td>
+			<figure class="itemside align-items-center">
+				<div class="aside"><img v-bind:src="data.image" class="img-sm"></div>
+				<figcaption class="info">
+					<a href="#" class="title text-dark">{{ data.product }}</a>
+					<p class="text-muted small">Color: {{ data?.color || 'N/A' }} <br> Size: {{ data?.size || 'N/A' }}</p>
+				</figcaption>
+			</figure>
+		</td>
 
-	<td> 
-		<!-- increase decrease -->
-					<div class="col"> 
-						<div class="input-group input-spinner">
-							<div class="input-group-prepend">
-							<button class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </button>
-							</div>
-							<input type="text" class="form-control"  value="1">
-							<div class="input-group-append">
-							<button class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </button>
-							</div>
+		<td> 
+			<!-- increase decrease -->
+						<div class="col"> 
+							<div class="input-group input-spinner">
+								<div class="input-group-prepend">
+								<button @click="decreaseBy1(data)" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-minus"></i> </button>
+								</div>
+								<input type="text" class="form-control"  :value="data.quantity">
+								<div class="input-group-append">
+								<button @click="increaseBy1(data)" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-plus"></i> </button>
+								</div>
+							</div> 
 						</div> 
-					</div> 
-	</td>
+		</td>
 
-	<td> 
-        <!-- price info -->
-		<div class="price-wrap"> 
-			<var class="price">${{ value.price }}</var> 
-			<small class="text-muted"> ${{ value.price }} each </small> 
-		</div> 
-	</td>
+		<td> 
+			<!-- price info -->
+			<div class="price-wrap"> 
+				<var class="price">${{ data.price * data.quantity }}</var> 
+				<small class="text-muted"> ${{ data.price }} each </small> 
+			</div> 
+		</td>
 
-    <!-- remove -->
-	<td class="text-right"> 
-	    <a href="" class="btn btn-danger"> Remove</a>
-	</td>
-</tr>
+		<!-- remove -->
+		<td class="text-right"> 
+			<button @click="cartStore.removeFromCart(data.id)" class="btn btn-danger"> Remove</button>
+		</td>
+	</tr>
 
-</tbody>
+	</tbody>
 
 </table>
 </div>
